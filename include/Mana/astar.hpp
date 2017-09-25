@@ -9,26 +9,28 @@
 
 namespace Mana {
 
-template<class GridGraphT, class NodeT>
+template<class GridGraphT>
 class AStar
 {
+    using Node = typename GridGraphT::Node;
+
     GridGraphT mGraph;
     struct SearchData {
-        SearchData(const NodeT cameFrom, int cost = 0) :
+        SearchData(const Node cameFrom, int cost = 0) :
             mCameFrom(cameFrom), mCost(cost) { }
 
-        const NodeT &cameFrom() const {
+        const Node &cameFrom() const {
             return mCameFrom;
         }
 
         // Node we came from.
-        NodeT mCameFrom;
+        Node mCameFrom;
 
         // Cost of getting to node
         int mCost;
     };
 
-    using fScoredNode = std::pair<int, NodeT>;
+    using fScoredNode = std::pair<int, Node>;
     struct CompareFScoredNodes {
         bool operator() (const fScoredNode &a, const fScoredNode &b)
         {
@@ -37,7 +39,7 @@ class AStar
     };
 
     struct NodeHasher {
-        std::size_t operator() (const NodeT &node) const
+        std::size_t operator() (const Node &node) const
         {
             return std::hash<decltype(node.id())>{}(node.id());
         }
@@ -49,10 +51,10 @@ public:
     {
     }
 
-    std::vector<NodeT> findPath(const NodeT &start, const NodeT &goal)
+    std::vector<Node> findPath(const Node &start, const Node &goal)
     {
         std::priority_queue<fScoredNode, std::vector<fScoredNode>, CompareFScoredNodes> frontier;
-        std::unordered_map<NodeT, SearchData, NodeHasher> visited;
+        std::unordered_map<Node, SearchData, NodeHasher> visited;
 
         visited.reserve(mGraph.maxSize());
 
@@ -60,7 +62,7 @@ public:
         visited.emplace(start, SearchData(start));
         //visited.insert({start, SearchData(start)});
 
-        std::vector<NodeT> neighbors;
+        std::vector<Node> neighbors;
         while (!frontier.empty()) {
             auto current = std::move(frontier.top().second);
             frontier.pop();
@@ -84,7 +86,7 @@ public:
             }
         }
 
-        std::vector<NodeT> ret;
+        std::vector<Node> ret;
 
         auto end = visited.find(goal);
 

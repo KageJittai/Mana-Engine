@@ -16,6 +16,8 @@ class SquareGridGraph
 protected:
      std::size_t mWidth, mHeight;
 public:
+     using Node = NodeT;
+
     /**
      * @brief SquareGridGraph Constructor
      * @param width The width of the graph
