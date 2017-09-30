@@ -7,7 +7,7 @@ An engine based on the concepts and features of ManaSource
 
 * ~AStar Pathfinding~
 * Resource Pools
-* Unit Testing
+* ~Unit Testing~
 * Resource Pools
 * Image Dye
 * Sprites / Animations

@@ -14,3 +14,5 @@ aux_source_directory(src SRC_LIST)
 include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED ${SRC_LIST})
+
+add_subdirectory(tests)
