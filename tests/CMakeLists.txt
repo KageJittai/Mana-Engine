@@ -11,6 +11,6 @@ target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
 find_library(MANA_ENGINE_LIB Mana-Engine ${CMAKE_BINARY_DIR})
 
 # Make test executable
-set(TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} TEST_SOURCES)
 add_executable(tests ${TEST_SOURCES})
 target_link_libraries(tests Catch "${MANA_ENGINE_LIB}")
