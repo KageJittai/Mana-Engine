@@ -38,9 +38,8 @@ public:
      */
     virtual bool isNeighbor(const NodeT &first, const NodeT &second) const
     {
-        return (abs(first.x() - second.x()) <= 1) &&
-               (abs(first.y() - second.y()) <= 1) &&
-               isNodeOnGraph(first) && isNodeOnGraph(second);
+        return ((abs(first.x() - second.x()) == 1) ^ (abs(first.y() - second.y()) == 1))
+               && isNodeOnGraph(first) && isNodeOnGraph(second);
     }
 
     /**
