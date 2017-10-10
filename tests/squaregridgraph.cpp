@@ -20,7 +20,7 @@ TEST_CASE("Small SquareGridGraph", "[SquareGridGraph]")
     {
         REQUIRE(ssg.isNodeOnGraph({ 0,  0}) == true);
         REQUIRE(ssg.isNodeOnGraph({ 2,  2}) == true);
-        //REQUIRE(ssg.isNodeOnGraph({-1, -1}) == false);
+        REQUIRE(ssg.isNodeOnGraph({-1, -1}) == false);
         REQUIRE(ssg.isNodeOnGraph({ 5,  3}) == false);
         REQUIRE(ssg.isNodeOnGraph({ 5,  2}) == false);
     }
